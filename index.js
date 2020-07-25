@@ -1,4 +1,3 @@
-
 console.log("Launching bot...\n");
 
 const fs = require('fs');
@@ -16,10 +15,17 @@ for (const file of commandFiles) {
 	console.log("Set :" + command.name);
 }
 
+const people = {};
 
 client.login(token);
 
 client.once('ready', () => {
+
+	const members  = client.guilds.resolve('661862380996919322').members.cache;
+	members.each((member) => {
+		people[member.id] = member.displayName;
+	});
+
 	console.log('Ready!');
 });
 
@@ -28,20 +34,25 @@ const talkedRecently = new Set();
 client.on('raw', async packet => {
 	if(!['MESSAGE_REACTION_ADD'].includes(packet.t))return;
 	if(packet.d.user_id == '734080357040914582')return;
+
 	if(talkedRecently.has(packet.d.message_id))return;
 
 	const user = packet.d.user_id;
 	const channel = await client.channels.fetch(packet.d.channel_id);
 
 	const message = await channel.messages.fetch(packet.d.message_id);
-	if(!message.author.bot)return;
+	if(message.author.id != '734080357040914582')return;
 
 	talkedRecently.add(packet.d.message_id);
-	setTimeout(() => {
-		talkedRecently.delete(packet.d.message_id);
-	}, 40000);
 	
-	client.commands.get('editEmbed').execute(message);
+	setTimeout(() => {
+
+		client.commands.get('editEmbed').execute(people, message);	
+		talkedRecently.delete(packet.d.message_id);
+
+	}, 15000);
+	
+	client.commands.get('editEmbed').execute(people, message);
 	console.log("Done!");
 
 });
