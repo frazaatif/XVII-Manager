@@ -4,7 +4,7 @@ module.exports = {
 	args: 1,
 	command: true,
 	usage: '.nodepoll *message*',
-	execute(message, args) {
+	execute (message, args) {
 		const Discord = require('discord.js');
 		const fs = require('fs');
 
@@ -17,43 +17,30 @@ module.exports = {
 		     .setColor('#0099ff')
  			 .setTitle('Node War!')
  			 .setDescription(`${msg}`)
- 			 .addField("Zerg ⚔️","Push Enemy Back To Their Bases",false)
- 			 .addField("Breaker 🪓","Dive on Enemy Artifact",false)
- 			 .addField("Cannoneer\\Hwacha 🏹","Use Cannons/Hwacha",false)
- 			 .addField("Mahout 🐘","Elephant Rider",false)
- 			 .addField("Support 🛡️","Defend Hwacha/Cannons. Secure Buff Tower",false)
- 			 .addField("Scout 🔭 ","Find Enemy Bases",false)		
-             .addField("Absent 🆎 ","zZzZ",false)
-             .addField("Tentative 🤷","????",false);
+ 			 .addField("Zerg ⚔️","𝗣𝘂𝘀𝗵 𝗘𝗻𝗲𝗺𝘆 𝗕𝗮𝗰𝗸 𝗧𝗼 𝗧𝗵𝗲𝗶𝗿 𝗕𝗮𝘀𝗲𝘀",false)
+ 			 .addField("Breaker 🪓","𝗗𝗶𝘃𝗲 𝗮𝗻𝗱 𝗕𝗿𝗲𝗮𝗸 𝗔𝗿𝘁𝗶𝗳𝗮𝗰𝘁",false)
+ 			 .addField("Support 🛡️","𝗗𝗲𝗳𝗲𝗻𝗱 𝗛𝘄𝗮𝗰𝗵𝗮/𝗖𝗮𝗻𝗻𝗼𝗻𝘀",false)
+ 			 .addField("Cannoneer\\Hwacha 🏹","𝗨𝘀𝗲 𝗖𝗮𝗻𝗻𝗼𝗻𝘀/𝗛𝘄𝗮𝗰𝗵𝗮",true)
+ 			 .addField("Mahout 🐘","𝗘𝗹𝗲𝗽𝗵𝗮𝗻𝘁 𝗥𝗶𝗱𝗲𝗿",true)
+ 			 .addField("Scout 🔭 ","𝗙𝗶𝗻𝗱 𝗘𝗻𝗲𝗺𝘆 𝗕𝗮𝘀𝗲𝘀",true)		
+             .addField("Absent 🆎 ","zZzZ",true)
+             .addField("Tentative 🤷","????",true);
         
 
         
-        let sent = message.channel.send(finalmsg).then(sentMessage => {
-			sentMessage.react('⚔️')
-			.then(() => sentMessage.react('🪓'))
-			.then(() => sentMessage.react('🏹'))
-			.then(() => sentMessage.react('🐘'))
-			.then(() => sentMessage.react('🛡️'))
-			.then(() => sentMessage.react('🔭'))
-            .then(() => sentMessage.react('🆎'))
-            .then(() => sentMessage.react('🤷'));
-		    /*
-            fs.readFile('presmsgs.json', (err, data) => {
-            	if(err) throw err;
-            	let idlist = JSON.parse(data);
-            	console.log("Read Data for attendance.js");
-            });
-      		
-      		idlist.msgid.push(sentMessage.id);
-       		console.log( "pres: " + sentMessage.id );
-       		
-       		let writeData = JSON.stringify(idlist);
-
-       		fs.writeFile('presmsgs.json',writeData,(err) => {
-       			if(err)throw err;
-       			console.log("Written " + sentMessage.id + "To File!");
-       		});*/
+        let sent =  message.channel.send(finalmsg).then(async (sentMessage) => {
+			await sentMessage.react('⚔️');
+			await sentMessage.react('🪓');
+			await sentMessage.react('🛡️');
+			await sentMessage.react('🏹');
+			await sentMessage.react('🐘');
+			await sentMessage.react('🔭');
+            await sentMessage.react('🆎');
+            await sentMessage.react('🤷');
+		
+			return sentMessage;
 		});
+         
          
 
 	}
