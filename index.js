@@ -35,7 +35,9 @@ client.on('raw', async packet => {
 	if(!['MESSAGE_REACTION_ADD'].includes(packet.t))return;
 	if(packet.d.user_id == '734080357040914582')return;
 
-	if(talkedRecently.has(packet.d.message_id))return;
+	if(talkedRecently.has(packet.d.message_id)){
+		return;
+	}
 
 	const user = packet.d.user_id;
 	const channel = await client.channels.fetch(packet.d.channel_id);
@@ -46,11 +48,9 @@ client.on('raw', async packet => {
 	talkedRecently.add(packet.d.message_id);
 	
 	setTimeout(() => {
-
-		client.commands.get('editEmbed').execute(people, message);	
+		client.commands.get('editEmbed').execute(people, message);
 		talkedRecently.delete(packet.d.message_id);
-
-	}, 15000);
+	}, 10000);
 	
 	client.commands.get('editEmbed').execute(people, message);
 	console.log("Done!");
