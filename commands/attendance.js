@@ -17,28 +17,19 @@ module.exports = {
 		     .setColor('#0099ff')
  			 .setTitle('Node War!')
  			 .setDescription(`${msg}`)
- 			 .addField("Zerg ⚔️","𝗣𝘂𝘀𝗵 𝗘𝗻𝗲𝗺𝘆 𝗕𝗮𝗰𝗸 𝗧𝗼 𝗧𝗵𝗲𝗶𝗿 𝗕𝗮𝘀𝗲𝘀",false)
- 			 .addField("Breaker 🪓","𝗗𝗶𝘃𝗲 𝗮𝗻𝗱 𝗕𝗿𝗲𝗮𝗸 𝗔𝗿𝘁𝗶𝗳𝗮𝗰𝘁",false)
- 			 .addField("Support 🛡️","𝗗𝗲𝗳𝗲𝗻𝗱 𝗛𝘄𝗮𝗰𝗵𝗮/𝗖𝗮𝗻𝗻𝗼𝗻𝘀",false)
- 			 .addField("Cannoneer\\Hwacha 🏹","𝗨𝘀𝗲 𝗖𝗮𝗻𝗻𝗼𝗻𝘀/𝗛𝘄𝗮𝗰𝗵𝗮",true)
- 			 .addField("Mahout 🐘","𝗘𝗹𝗲𝗽𝗵𝗮𝗻𝘁 𝗥𝗶𝗱𝗲𝗿",true)
- 			 .addField("Scout 🔭 ","𝗙𝗶𝗻𝗱 𝗘𝗻𝗲𝗺𝘆 𝗕𝗮𝘀𝗲𝘀",true)		
-             .addField("Absent 🆎 ","zZzZ",true)
-             .addField("Tentative 🤷","????",true);
+ 			 .addField("Zerg ⚔️","**Clash with enemy and push them back to their base**",false)
+ 			 .addField("Breaker 🪓","**Dive into Enemy Artifact**",false)
+ 			 .addField("Support 🏹","**Use/Defend Cannons/Hwacha**",false)		
+             .addField("Absent/Tentative 🆎 ","**Please Remember to state the reason!**",true)
         
 
         
-        let sent =  message.channel.send(finalmsg).then(async (sentMessage) => {
-			await sentMessage.react('⚔️');
-			await sentMessage.react('🪓');
-			await sentMessage.react('🛡️');
-			await sentMessage.react('🏹');
-			await sentMessage.react('🐘');
-			await sentMessage.react('🔭');
-            await sentMessage.react('🆎');
-            await sentMessage.react('🤷');
-		
-			return sentMessage;
+        message.channel.send(finalmsg).then(async (sentMessage) => {
+			sentMessage.react('⚔️')
+			.then(sentMessage.react('🪓'))
+			.then(sentMessage.react('🏹'))
+            .then(sentMessage.react('🆎'))
+			.catch((err) => console.log(err));
 		});
          
          
