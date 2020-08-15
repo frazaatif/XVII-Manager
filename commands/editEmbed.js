@@ -20,18 +20,19 @@ module.exports = {
 		
 		
 		async function start() {
-	
+			var totcount = 0,abscount = 0;
 			var promises = reactionManager.map(async (MessageReaction, emoji) => {
 				if(!emojis.includes(emoji))return 
 				return MessageReaction.users.fetch()
 						.then((presUsers) => {
-							presUsers.forEach(async (Snowflake, User) => {
-								if(User != '734080357040914582') {
-									//var nowPeople = people[emoji];
-									//people[emoji] = nowPeople + ", " + allPeople[User];	
-									people[emoji].push(allPeople[User]);
-								}
-							});
+							var count = 0;
+							for(User of presUsers) {
+								if(User[0] == '734080357040914582')continue;
+								count++;
+								people[emoji].push("`" + count + ".`" + allPeople[User[0]]);
+							}
+							if(emoji == '🆎')count = 0;
+							totcount += count;
 						}).catch((err) => console.log(err));
 			});
 			Promise.all(promises).then(() => {
@@ -44,10 +45,11 @@ module.exports = {
 					.setColor('#0099ff')
 					.setTitle(titl)
 					.setDescription(descri)
-					.addField("Zerg ⚔️","**Clash with enemy and push them back to their base**\n" + people['⚔️'].join(),false)
-					.addField("Breaker 🪓","**Dive into Enemy Artifact**\n" + people['🪓'].join(),false)
-					.addField("Support 🏹","**Use/Defend Cannons/Hwacha**\n" + people['🏹'].join(),false)		
-					.addField("Absent/Tentative 🆎","**Please Remember to state the reason!**\n" + people['🆎'].join(),true);
+					.addField("`Available:" + totcount + "`" ,"***Familiarize with your Roles and Join VC 10mins before for briefing!***",false)
+					.addField("   Flex 🪓     ","**Dive Artifact**\n" + people['🪓'].join('\n'),true)
+					.addField("  Zerg ⚔️   ","**Push Enemy Back**\n" + people['⚔️'].join('\n'),true)
+					.addField("Support 🏹 ","**Use/Defend\nCannons/Hwacha**\n" + people['🏹'].join('\n'),true)		
+					.addField("Absent/Tentative 🆎","**Please Remember to state the reason!**\n" + people['🆎'].join(),false);
 
 				message.edit(newMsg);
 			});
