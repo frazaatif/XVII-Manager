@@ -44,12 +44,21 @@ module.exports = {
 				const newMsg = new Discord.MessageEmbed()
 					.setColor('#0099ff')
 					.setTitle(titl)
-					.setDescription(descri)
-					.addField("`Available:" + totcount + "`" ,"***Familiarize with your Roles and Join VC 10mins before for briefing!***",false)
-					.addField("   Flex 🪓     ","**Dive Artifact**\n" + people['🪓'].join('\n'),true)
-					.addField("  Zerg ⚔️   ","**Push Enemy Back**\n" + people['⚔️'].join('\n'),true)
+					.setDescription(descri);
+					
+				if(titl == 'Node War!'){	
+					newMsg.addField("Available:`" + totcount + "`" ,"***Familiarize with your Roles and Join VC 10mins before for briefing!***",false)
+					.addField("Flex 🪓     ","**Dive Artifact**\n" + people['🪓'].join('\n'),true)
+					.addField("Zerg ⚔️   ","**Push Enemy Back**\n" + people['⚔️'].join('\n'),true)
 					.addField("Support 🏹 ","**Use/Defend\nCannons/Hwacha**\n" + people['🏹'].join('\n'),true)		
 					.addField("Absent/Tentative 🆎","**Please Remember to state the reason!**\n" + people['🆎'].join(),false);
+				} else {
+					newMsg.addField("Available:`" + totcount + "`" ,"***Familiarize with your Roles and Join VC 10mins before for briefing!***",false)
+					.addField("Flex 🪓     ","**Dive Enemy**\n" + people['🪓'].join('\n'),true)
+					.addField("Frontline ⚔️   ","**Ball together & push**\n" + people['⚔️'].join('\n'),true)
+					.addField("Backline 🏹 ","**Ranged DPS**\n" + people['🏹'].join('\n'),true)		
+					.addField("Absent/Tentative 🆎","**Please Remember to state the reason!**\n" + people['🆎'].join(),false);
+				}
 
 				message.edit(newMsg);
 			});
