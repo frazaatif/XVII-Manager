@@ -50,7 +50,7 @@ client.on('raw', async packet => {
 	setTimeout(() => {
 		client.commands.get('editEmbed').execute(people, message);
 		talkedRecently.delete(packet.d.message_id);
-	}, 10000);
+	}, 5000);
 	
 	client.commands.get('editEmbed').execute(people, message);
 	console.log("Done!");
@@ -68,6 +68,7 @@ client.on('message',async message => {
     const command = client.commands.get(commandName);
     
     if(command.args > args.length) { 
+		console.log(args);
     	return message.channel.send(`You haven't provided enough arguments , ${message.author}!\n`);
     }
     try {
