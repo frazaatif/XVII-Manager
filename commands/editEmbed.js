@@ -37,8 +37,8 @@ module.exports = {
 			});
 			Promise.all(promises).then(() => {
 				console.log(people);
-
-				const descri = message.embeds[0].description;
+				const descri = "Friendly War with AllegianceAE on Tuesday 20:30 (Server) at Kamasylve Valley";
+				//const descri = message.embeds[0].description;
 				const titl = message.embeds[0].title;
 			
 				const newMsg = new Discord.MessageEmbed()
