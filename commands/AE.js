@@ -5,7 +5,6 @@ module.exports = {
 	async execute(message,args) {
 		const Discord = require('discord.js');
 		
-		await message.react('👍');
 		
 		console.log("Reached in AE");
 		
@@ -20,9 +19,12 @@ module.exports = {
 		const endgoal = args.shift();
 		
 		if(endgoal <= pres){
-			//console.log("endgoal <= pres");
+			await message.reply(`Why would you wanna fall back to ${Romans[endgoal]} from ${Romans[initia]}? Pepega?`);
 			return;
 		}
+		
+		await message.react('👍');
+		
 		var pristines = 0;
 		var restores = 0, highest = 0;
 		const channel = message.channel;
@@ -52,11 +54,11 @@ module.exports = {
 			if(pres == endgoal){
 				var msg = new Discord.MessageEmbed()
 							.setTitle("Auto Awakening Enhancement")
-							.setDescription(`You used ** ${pristines} Pristines , ${5*pristines}M Silver** and ** ${restores} Resto scrolls**to reach your target!\n Number of times you reached a particular enhancement is stated below:`);
+							.setDescription(`You used ** ${pristines} Pristines , ${5*pristines}M Silver** and ** ${restores} Resto scrolls**to reach **${Romans[endgoal]}** from **${Romans[initia]}**!\n Number of times you reached a particular enhancement is stated below:`);
 				
 				for(let i = 0 ; i <= endgoal ; ++i) {
 					if(!reached[i])continue;
-					msg.addField(`${Romans[i]} : ${reached[i]}`,`Time's succeeded to next level: ${succeeded[i]}`,false);
+					msg.addField(`${Romans[i]} (Base ${chances[i]}% to succeed) : ${reached[i]}`,`Time's succeeded to next level: ${succeeded[i]}`,false);
 				}			
 				msg.addField("Methods used: ", "-> 10% valks till DUO, 50% rest of the times \n -> No restoration attempts for +40/I \n -> **'Number of Times reached an Enhancement'** counts how many times you reached that enhancement either from Falling back from next level/Successful Enhancement from previous level");
 				await channel.send(msg);
