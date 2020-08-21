@@ -4,6 +4,10 @@ module.exports = {
 	args : 1,
 	command: false,
 	execute(allPeople, message) {
+		const titl = message.embeds[0].title;
+		if(titl != 'Node War!') {
+		    if(titl != 'Guild War!'){return;}
+		}
 		const Discord = require('discord.js');
 		
 		var emojis = ['⚔️','🪓','🏹','🆎'];
@@ -39,7 +43,7 @@ module.exports = {
 				console.log(people);
 				//const descri = "Friendly War with AllegianceAE on Tuesday 20:30 (Server) at Kamasylve Valley";
 				const descri = message.embeds[0].description;
-				const titl = message.embeds[0].title;
+				//const titl = message.embeds[0].title;
 			
 				const newMsg = new Discord.MessageEmbed()
 					.setColor('#0099ff')
