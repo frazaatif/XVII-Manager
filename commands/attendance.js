@@ -26,7 +26,7 @@ module.exports = {
 			dmchannel.awaitMessages(filter2, {max:1, time:120000}).then(async (collected) => {
 				descri = collected.last().content;
 				await dmchannel.send("Understood, The poll will be created shortly!");
-				if(opt == '2') {
+				if(opt == 'Node War') {
 					finalmsg = new Discord.MessageEmbed()
 						.setColor('#0099ff')
 						.setTitle('Node War!')
