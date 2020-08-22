@@ -47,7 +47,7 @@ module.exports = {
 			
 				const newMsg = new Discord.MessageEmbed()
 					.setColor('#0099ff')
-					.setTitle("Node War!");
+					.setTitle("Node War!")
 					.setDescription(descri);
 					
 				if(!(titl == 'Node War!')){	
