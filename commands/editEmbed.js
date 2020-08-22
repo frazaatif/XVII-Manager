@@ -47,10 +47,10 @@ module.exports = {
 			
 				const newMsg = new Discord.MessageEmbed()
 					.setColor('#0099ff')
-					.setTitle("Node War!")
+					.setTitle(titl)
 					.setDescription(descri);
 					
-				if(!(titl == 'Node War!')){	
+				if(titl == "Node War!"){	
 					newMsg.addField("Available:`" + totcount + "`" ,"***Familiarize with your Roles and Join VC 10mins before for briefing!***",false)
 					.addField("Flex 🪓     ","**Dive Artifact**\n" + people['🪓'].join('\n'),true)
 					.addField("Zerg ⚔️   ","**Push Enemy Back**\n" + people['⚔️'].join('\n'),true)
