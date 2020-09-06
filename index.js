@@ -211,7 +211,7 @@ async function redopoll(namesInfo) {
 	}
 	const newMsg = new Discord.MessageEmbed()
 						.setTitle("A New Name for a New Family :) ")
-						.setDescription("Use **.vote <name>** to vote for a name. It will be added if does not already exist in list :) \n You can vote for as many names as you want, once per name. ")
+						.setDescription("Use **.vote name** to vote for a name. It will be added if does not already exist in list :) \n You can vote for as many names as you want, once per name. ")
 						.addField("Top Names" , topnames, true)
 						.addField("Total Votes", topvotes, true)
 						.addField("Other names", extraNames, false);
