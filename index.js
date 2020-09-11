@@ -184,8 +184,8 @@ async function redopoll() {
 	const newMsg = new Discord.MessageEmbed()
 	                  .setTitle('Name Poll Finale \(*.*)/')
 					  .setDescription('Vote for your favourite name by using **.vote name**')
-					  .addField('NSFW',`Voted by **${NSFWinfo.length}** people!`,false)
-					  .addField('Yggdrasil',`Voted by **${Ygginfo.length}** people!`,false);
+					  .addField('NSFW',`Voted by **${NSFWinfo.length-1}** people!`,false)
+					  .addField('Yggdrasil',`Voted by **${Ygginfo.length-1}** people!`,false);
 					  
 	const pollmsgID = "753957524881014864";
 	const pollchannelID = "752197245822173375";
