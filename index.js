@@ -182,7 +182,7 @@ async function redopoll() {
 	var Ygginfo = snapshot.child(`Yggdrasil`).val().votedBy;
 	
 	const newMsg = new Discord.MessageEmbed()
-	                  .setTitle('Name Poll Finale \(*.*)/')
+	                  .setTitle('Name Poll Finale :)')
 					  .setDescription('Vote for your favourite name by using **.vote name**')
 					  .addField('NSFW',`Voted by **${NSFWinfo.length-1}** people!`,false)
 					  .addField('Yggdrasil',`Voted by **${Ygginfo.length-1}** people!`,false);
