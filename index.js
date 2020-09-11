@@ -40,10 +40,7 @@ var functions = [
 		name : "vote",
 		args: 1,
 		async execute(message, args){
-	     	const waitFor = (ms) => new Promise(r => setTimeout(r, ms));
-		
-			const pollmsgID = "752198260382367834";
-			const pollchannelID = "752197245822173375";
+			
 			const newName = args.shift();
 			
 			const authorName = message.guild.members.cache.get(message.author.id).displayName;
@@ -55,40 +52,40 @@ var functions = [
 			
 			if(snapshot.child(`${newName}`).exists()){
 				
-				var info = snapshot.child(`${newName}`).val().votedBy ;
-				var Votes = snapshot.child(`${newName}`).val().votes;
-				if(info.includes(message.author.id)) {
-					message.reply(`You have already voted for ${newName}!`).then(async (sentMessage) => {
-						await waitFor(2000);
+				var NSFWinfo = snapshot.child(`NSFW`).val().votedBy;
+				var Ygginfo = snapshot.child(`Yggdrasil`).val().votedBy;
+				
+				if(NSFWinfo.includes(message.author.id) || Ygginfo.includes(message.author.id)) {
+					message.author.send(`You have already voted for ${(NSFWinfo.includes(message.author.id)?'NSFW':'Yggdrasil')}!`).then(async (sentMessage) => {
 						await message.delete();
-						await sentMessage.delete();
 					});
 					return;
 				}
-				info.push(message.author.id);
-				Votes++;
-				ref.child(`${newName}`).update({
-					votedBy: info
-				});
-				message.reply(`You voted for ${newName}`).then(async(sentMessage) => {
-					await waitFor(2000);
-					await message.delete();
-					await sentMessage.delete();
-				});
-				 redopoll();
-			}else{
+				if(newName == 'NSFW') {
+					
+				    NSFWinfo.push(message.author.id);
+					ref.child(`${newName}`).update({
+					  votedBy: NSFWinfo
+				    });
+				    redopoll();
+				}else if(newName == 'Yggdrasil') {
+					
+				    Ygginfo.push(message.author.id);
+					ref.child(`${newName}`).update({
+					  votedBy: Ygginfo
+				    });
+				    redopoll();
+				}
 				
-				ref.child(`${newName}`).set({
-					createdBy: message.author.id,
-					votedBy: [message.author.id]
+				message.author.send(`You voted for ${newName}!`).then(async (sentMessage) => {
+						await message.delete();
 				});
 				
-				message.author.send(`You created the option ${newName} !`).then(async (sentMessage) => {
-					await waitFor(2000);
-					await message.delete();
-				});
-				redopoll();
-				return;
+			} else {
+					message.author.send(`Invalid option , Vote for either NSFW or Yggdrasil only!`).then(async (sentMsg) => {
+						await message.delete();
+					});
+					return;
 			}
 			
 		}
@@ -176,58 +173,24 @@ client.on('message',async message => {
 
 });
 
-async function redopoll(namesInfo) {
+async function redopoll() {
 	
-	const pollmsgID = "752198260382367834";
-	const pollchannelID = "752197245822173375";
+	var ref = db.ref("names");
+	const snapshot = await ref.once('value');
 	
-	const pollMsg = await client.channels.cache.get(pollchannelID).messages.fetch(pollmsgID);
+	var NSFWinfo = snapshot.child(`NSFW`).val().votedBy;
+	var Ygginfo = snapshot.child(`Yggdrasil`).val().votedBy;
 	
-	var namesInfo = await getAll();
-	
-	var topnames = "", topvotes = "";
-	var extraNames = "";
-	
-	if(!namesInfo.length) {
-		topnames = "N/A";
-		topvotes = "N/A";
-	    extraNames = "N/A";
-	}else {
-		namesInfo.sort((a,b) => (a.count > b.count) ? -1 : ((b.count > a.count) ? 1 : 0));
-		var toplimit = (namesInfo.length < 20) ? namesInfo.length : 20;
-		while(toplimit) {
-			topnames += namesInfo[0].name + "\n";
-			topvotes += namesInfo[0].count + "\n";
-			namesInfo.shift();
-			--toplimit;
-		}
-		if(!namesInfo.length){extraNames = "N/A";}
-		toplimit = namesInfo.length;
-		while(toplimit && extraNames.length <= 500) {
-			extraNames += ` ${namesInfo[0].name}(${namesInfo[0].count}) `
-			namesInfo.shift();
-			--toplimit;
-		}
-	}
 	const newMsg = new Discord.MessageEmbed()
-						.setTitle("A New Name for a New Family :) ")
-						.setDescription("Use **.vote name** to vote for a name. It will be added if does not already exist in list :) \n You can vote for as many names as you want, once per name. ")
-						.addField("Top Names" , topnames, true)
-						.addField("Total Votes", topvotes, true)
-						.addField("Other names", extraNames, false);
+	                  .setTitle('Name Poll Finale \(*.*)/')
+					  .setDescription('Vote for your favourite name by using **.vote name**')
+					  .addField('NSFW',`Voted by **${NSFWinfo.length}** people!`,false)
+					  .addField('Yggdrasil',`Voted by **${Ygginfo.length}** people!`,false);
+					  
+	const pollmsgID = "753957524881014864";
+	const pollchannelID = "752197245822173375";
+
+	const pollMsg = await client.channels.cache.get(pollchannelID).messages.fetch(pollmsgID);
 	await pollMsg.edit(newMsg);
-	return Promise.resolve();
-	
-	async function getAll() {
-	  const waitFor = (ms) => new Promise(r => setTimeout(r, ms));
 		
-	  var ref = db.ref("names");
-	  const snapshot = await ref.once('value');
-	  var info = [];
-	  snapshot.forEach((objec) => {
-		  info.push({name: objec.key, count: objec.val().votedBy.length});
-	  });
-	  await waitFor(1000);
-	  return info;
-	}
 }
