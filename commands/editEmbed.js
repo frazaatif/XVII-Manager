@@ -8,6 +8,9 @@ module.exports = {
 		if(titl != 'Node War!') {
 		    if(titl != 'Guild War!'){return;}
 		}
+		if(message.author.bot) {
+		  return;
+		}
 		const Discord = require('discord.js');
 		
 		var emojis = [];
