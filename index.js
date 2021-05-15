@@ -7,20 +7,20 @@ const Discord = require('discord.js');
 var admin = require('firebase-admin');
 const serviceAccountKey = {
   "type": "service_account",
-  "project_id": "capt-pepe-1595573631364",
-  "private_key_id": "0046cd9d8d96279a835c0371c8a1fb1557c9533b",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCgXa9SmImpIH2q\nJc1+tXICI3iteMQUGEPdJ1HcJPZIK6fIs8k97yiX5+sk3JpKuYrN056fFNX1TZQw\nq80jTbvuJKZcL6VyWCa8/c1Nj79go9UN+8ofAOtsHuvagUuffuRnOz8CNmPccMn2\nhl9kjfQMk8J3rxadne0TGBCmzJ0GzDqecqSGF5aebv6foxd1UCVpzTSXWI2t1JkD\nSUN5N8GHUFtV1H//mC487LgT1IxESHxzQ8G/hp5tBXOVOziSxRzZVKO6FbN3LO7Q\ndOVjA12tKZURdKpoemHDa9LuoJwxMgrRRD3gOBD+mhgyd8q6yOODCflrQnfSpo2R\n10V2bqxTAgMBAAECggEAAPtmD0yIZYkyYKy6oZ3xOPtkD4KrkqGU4xFxB3nCutox\naVaumG5usDoPaZeSEYbyFTK3yviuzRVBbVd7d03QRo/RSOUaaGqbu6+hwmnEWZ8K\nsYvyEe/36tZt5eD5YVblpvLgmqkwvFwgi0TRxphyz7q7TT1pTs291s6M/BNJK9aK\nf1pGIm0HRkzNAkHvs0WbmvP0z+4tcVpjjyfjbMonDE9gouBzVFHGDbBUM4Vi8hN0\ne1OrdtBGizSqgaQkPkVZTGaOeL9tVkRCqAEGqSKeXXJ3qVjwFOMTlpFKPYiiDhR2\nNVRpvi8Art1u76xWrrb6Vb4OWIyWJ0hnFXHShiz6TQKBgQDPzWFKRolRTlCMNMiS\n2k97rX6trW0YSrQyB4lLMqNM7/iwNimVc7xcKEqT+u6C9UEsJHtNYvwEp5ActzXm\nQk6MSt+6r/RE5+LzUAer3Gv6Tjgfeu++WUUcTfDYF+02lD2dvJ2FFYGrVZbUkVYT\nMT2k0oZk9GRwadbRgMw699N7jwKBgQDFj7ERXDnb2jbu7ycXUy7Al2GMxMM2yR2E\ntq8HOMY7FJ+afMkARS6MqIR66uo0Mhwa7xKqcJfEsB8sNdf3fECJM0o9VmiZXlv9\nTVlRRjVqyhcKA6/RD57NPJB/z8A8mN3/26K5MBOglSZyaxU0LpzBSamBacc9q+Dg\nUMC7wjFw/QKBgDRB4OKN5IB24liv+XS8w9pFYiMJBvNh7fja3lLz1A9IFdEyfbig\n11CRrVeTdiGmzZHtRrjKWLhO7zXZeQuDxz8OoT7QeuxNKEyp5pP4pYrX2tNH1jyX\nNIMOsq+VLMlZ9DjTswVByE8vAfRI7E19R5RIgRWoRA3k/+nFqxZ1NlDPAoGAa8S0\njInIrhtdN/2RT3H64OgzOHzlGG+hAJI+7CuWRwg7ACTt6I3UlLogeoTG+W4UUsTz\nY7JDt/FzL8S3aLOI6M7nwonuSStl9slI3cL0xKo04yubrulccQyGrpH/hY7GGxoO\nrAKD0mdKL8QmLu72Z6HtK0EuhH/MDdE/Maz/F2kCgYEAxEHwKIcPAvBxY/CcOXLG\nwitNAUqagwukwL9lxihdJeWS3as7fQhO+AwjW2RxNHbEYLil6AtIp8XaQ/tT5DCb\nAZBgl2igMZyvO+guCxshMEaWEorX3roYVhyPL7VNFPTmuhtuDBv3exZhyLLuHgW0\nojETjauXzj6TlmZxwyloKZM=\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-k4a8f@capt-pepe-1595573631364.iam.gserviceaccount.com",
-  "client_id": "118315261931401311501",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-k4a8f%40capt-pepe-1595573631364.iam.gserviceaccount.com"
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": ""
 };
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
-  databaseURL: "https://capt-pepe-1595573631364.firebaseio.com"
+  databaseURL: ""
 });
 var db = admin.database();
 
